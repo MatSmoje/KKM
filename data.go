@@ -9,7 +9,9 @@ import (
 )
 
 
-//const defaultPassword = []byte("$2a$10$6OLKtiwKQdk69sHoaRHRJOSZKXSSJlUClSfUDz4j7MdtrBPF3WADi") //holamundo
+const defaultPassword = "$2a$10$6OLKtiwKQdk69sHoaRHRJOSZKXSSJlUClSfUDz4j7MdtrBPF3WADi" //holamundo
+const defaultUser = "JohnDoe" //holamundo
+const defaultMail = "john.doe@example.com" //holamundo
 
 
 func createDataBase() {
@@ -19,33 +21,14 @@ func createDataBase() {
 	}
 	file.Close()
 }
-/*
-func createTable(db *sql.DB) {
-	
 
-    users_table := `CREATE TABLE users (
-        id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-        "FirstName" TEXT,
-        "LastName" TEXT,
-        "Dept" TEXT,
-        "Salary" INT);`
-        query, err := db.Prepare(users_table)
-        if err != nil {
-            log.Fatal(err)
-        }
-        query.Exec()
-        fmt.Println("Table created successfully!")
-}
-*/
-func main(){
-	fmt.Println("crea DB")
-	createDataBase()
+
+func createTable() *sql.DB {
 	db, err := sql.Open("sqlite3", "passwd.db")
 	if err != nil {
 		panic(err)
 	}
-	defer db.Close()
-	
+	//defer db.Close()
 	
 	crearTabla := `
     CREATE TABLE IF NOT EXISTS passwd (
@@ -53,27 +36,32 @@ func main(){
         user TEXT,
         passwd TEXT,
 		mail TEXT
-    )
-`
-_, err = db.Exec(crearTabla)
-if err != nil {
-    panic(err)
+    )`
+	_, err = db.Exec(crearTabla)
+	if err != nil {
+		panic(err)
+	}
+	return db
 }
 
+func insertData(db *sql.DB){
+	stmt, err := db.Prepare("INSERT INTO passwd(user, passwd, mail) VALUES(?, ?, ?)")
+	if err != nil {
+		panic(err)
+	}
+	defer stmt.Close()
 
-
-/**/
-
-stmt, err := db.Prepare("INSERT INTO passwd(user, passwd, mail) VALUES(?, ?, ?)")
-if err != nil {
-    panic(err)
+	_, err = stmt.Exec(defaultUser, defaultPassword, defaultMail)
+	if err != nil {
+		panic(err)
+	}
+	defer db.Close()
 }
-defer stmt.Close()
 
-_, err = stmt.Exec("John", "$2a$10$6OLKtiwKQdk69sHoaRHRJOSZKXSSJlUClSfUDz4j7MdtrBPF3WADi", "john.doe@example.com")
-if err != nil {
-    panic(err)
-}
-
+func main(){
+	fmt.Println("crea DB")
+	createDataBase()
+	db := createTable()
+	insertData(db)
 }
 
