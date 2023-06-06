@@ -33,5 +33,7 @@ func login() {
 }
 
 func main() {
-	login()
+	fmt.Println("crea DB")
+	createDataBase()
+	//login()
 }
