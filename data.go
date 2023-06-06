@@ -22,7 +22,7 @@ func createDataBase() {
 	file.Close()
 }
 
-
+/**/
 func createTable() *sql.DB {
 	db, err := sql.Open("sqlite3", "passwd.db")
 	if err != nil {
