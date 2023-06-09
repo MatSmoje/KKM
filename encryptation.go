@@ -6,24 +6,32 @@ import (
 )
 
 
-func encryptPassword(password string) []byte {
-	var saltedPwd string = "hola"+password
-	fmt.Println(bcrypt.DefaultCost)
-	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(saltedPwd), bcrypt.DefaultCost)
+func hashPassword(password string) []byte {
+	var saltedPasswd string = "hola"+password
+	fmt.Println(bcrypt.DefaultCost) //Averiguar
+	hashedValue, err := bcrypt.GenerateFromPassword([]byte(saltedPasswd), bcrypt.DefaultCost)
 	
 	if err != nil {
-		fmt.Println("Error al generar el hash de contraseña:", err)
+		fmt.Println("Error al generar el hash de valor:", err)
 	}
-	fmt.Println(string(hashedPassword))
-	return hashedPassword
-}
-
-func encryptCoord(coord string) string {
-	var salt string = "1990"+coord
-	return salt
+	fmt.Println(string(hashedValue))
+	return hashedValue
 }
 
 
+func EncryptData(data string) string  {
+	return fmt.Println("data encrypted")
+}
+
+
+func DecryptData(data string) string  {
+	return fmt.Println("data Decrypted")
+}
+
+
+func CompareHash(storedHash string, passwordHash string) bool  {
+	return true
+}
 /*
 
 	// Verificar contraseña
