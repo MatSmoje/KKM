@@ -30,16 +30,9 @@ func DecryptData(data string) string  {
 
 
 func CompareHash(storedHash string, passwordHash string) bool  {
-	return true
-}
-/*
-
-	// Verificar contraseña
-	enteredPassword := "contrasena_secreta" // Contraseña ingresada por el usuario
-	err = bcrypt.CompareHashAndPassword(hashedPassword, []byte(enteredPassword))
+	err = bcrypt.CompareHashAndPassword(storedHash, []byte(passwordHash))
 	if err == nil {
-		fmt.Println("Contraseña válida")
-	} else {
-		fmt.Println("Contraseña incorrecta")
-	}
-*/
+		return true
+	} 
+	return false
+}
