@@ -3,7 +3,7 @@ package main
 import (
 	"database/sql"
     _ "github.com/mattn/go-sqlite3"
-	"golang.org/x/crypto/bcrypt"
+	_ "golang.org/x/crypto/bcrypt"
 	"os"
 	"fmt"
 	"log"
@@ -19,6 +19,15 @@ func createDataBase() {
 		log.Fatal(err)
 	}
 	file.Close()
+}
+
+
+func conectionToDatabase() *sql.DB {
+	db, err := sql.Open("sqlite3", "passwd.db")
+	if err != nil {
+		panic(err)
+	}
+	return db
 }
 
 
@@ -59,8 +68,8 @@ func insertDataToUserTable(db *sql.DB){
 }
 
 
-func insertDataToPassword(db *sql.DB, tipo string, key string, value string){
-	stmt, err := db.Prepare("INSERT INTO passwd(user, passwd, mail) VALUES(?, ?, ?)")
+func insertDataToCoord(db *sql.DB, tipo string, key string, value string){
+	stmt, err := db.Prepare("INSERT INTO coord(tipo, key, value) VALUES(?, ?, ?)")
 	if err != nil {
 		panic(err)
 	}
@@ -74,24 +83,29 @@ func insertDataToPassword(db *sql.DB, tipo string, key string, value string){
 }
 
 
-func getDataFromUserTable(){
-	fmt.Prinln("..")
+func getDataFromUserTable2(db *sql.DB, tipo string, key string){
+	response, err := db.Query("SELECT KEY, VALUE FROM COORD WHERE TIPO = ? AND KEY = ?", tipo, key)
+	if err != nil {
+		panic(err)
+	}
+	for response.Next() {
+		var coord string
+		var val string
+		err = response.Scan(&val, &coord)
+		fmt.Println(val, coord)
+	}
 }
 
 
 func getDataFromUserTable(){
-	fmt.Prinln("..")
-}
-
-func changePassword(passwd string) string{
-	fmt.Prinln("..")
+	fmt.Println("..")
 }
 
 
+
+/*
 func main(){
 	fmt.Println("crea DB")
 	createDataBase()
 	db := createTable()
-	insertData(db)
-}
-
+	*/

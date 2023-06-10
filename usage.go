@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"os"
-    //"reflect" //4type of vars
 )
 
 
@@ -45,16 +44,23 @@ func argumentsInterpreter(arguments []string){
                 print_version()
             }
             if arguments[1] == "-pw" || arguments[1] == "-passwd" {
-                fmt.Println("Cambio De Passwd")
+                db := conectionToDatabase()
+				fmt.Println("Change Passwd")
+				db.Close()
             }
         case len(arguments) == 9:
             if (arguments[1] == "-t" || arguments[1] == "-type") && (arguments[3] == "-p1") && (arguments[5] == "-p2") && (arguments[7] == "-p3"){
-                fmt.Println("Print coords")
+				db := conectionToDatabase()
+				fmt.Println("Print coords")
+                getDataFromUserTable2(db, arguments[2], arguments[4])
+				db.Close()
             }
             
-        case len(arguments) == 6:
-            if (arguments[1] == "-a" || arguments[1] == "-add") && (arguments[2] == "-k") && (arguments[4] == "-v"){
-                fmt.Println("Add coords")
+        case len(arguments) == 8:
+            if (arguments[1] == "-a" || arguments[1] == "-add")  && (arguments[2] == "-t") && (arguments[4] == "-k") && (arguments[6] == "-v"){
+				db := conectionToDatabase()
+				fmt.Println(arguments[3], arguments[5], arguments[7])
+				insertDataToCoord(db, arguments[3], arguments[5], arguments[7])
             }            
         default:
             print_help()
@@ -62,9 +68,9 @@ func argumentsInterpreter(arguments []string){
     }
 }
 
-
+/*
 func main() {
-	//print_help()
-	//print_version()
-    argumentsInterpreter(os.Args)
-}
+	print_help()
+	print_version()
+    //argumentsInterpreter(os.Args)
+}*/

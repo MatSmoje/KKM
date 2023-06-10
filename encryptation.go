@@ -20,12 +20,12 @@ func hashPassword(password string) []byte {
 
 
 func EncryptData(data string) string  {
-	return fmt.Println("data encrypted")
+	return "data encrypted"
 }
 
 
 func DecryptData(data string) string  {
-	return fmt.Println("data Decrypted")
+	return "data Decrypted"
 }
 
 

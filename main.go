@@ -2,12 +2,12 @@ package main
 
 import (
 	"fmt"
-	"golang.org/x/crypto/ssh/terminal"
+	//"golang.org/x/crypto/ssh/terminal"
 	"os"
+	//"golang.org/x/crypto/bcrypt"
 )
 
-
-
+/*
 func login() {
 	
 
@@ -30,9 +30,15 @@ func login() {
 		fmt.Println("Contraseña incorrecta")
 	}
 }
+*/
+
+
 
 func main() {
+	//createDataBase()
+	//createTable()
+	argumentsInterpreter(os.Args)
 	fmt.Println("crea DB")
-	createDataBase()
+	
 	//login()
 }
