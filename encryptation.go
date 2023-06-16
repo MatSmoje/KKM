@@ -6,19 +6,19 @@ import (
 )
 
 
-func hashPassword(password string) []byte {
-	var saltedPasswd string = "hola"+password
-	fmt.Println(bcrypt.DefaultCost) //Averiguar
-	hashedValue, err := bcrypt.GenerateFromPassword([]byte(saltedPasswd), bcrypt.DefaultCost)
+func hash(coord string) string {
+	var saltedCoord string = "holaMundo"+coord
+	//fmt.Println(bcrypt.DefaultCost) //Averiguar
+	hashedValue, err := bcrypt.GenerateFromPassword([]byte(saltedCoord), bcrypt.DefaultCost)
 	
 	if err != nil {
 		fmt.Println("Error al generar el hash de valor:", err)
 	}
-	fmt.Println(string(hashedValue))
-	return hashedValue
+	//fmt.Println(string(hashedValue))
+	return string(hashedValue)
 }
 
-
+/*
 func EncryptData(data string) string  {
 	return "data encrypted"
 }
@@ -30,9 +30,10 @@ func DecryptData(data string) string  {
 
 
 func CompareHash(storedHash string, passwordHash string) bool  {
-	err = bcrypt.CompareHashAndPassword(storedHash, []byte(passwordHash))
+	err := bcrypt.CompareHashAndPassword([]byte(storedHash), []byte(passwordHash))
 	if err == nil {
 		return true
 	} 
 	return false
 }
+*/
