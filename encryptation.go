@@ -1,11 +1,20 @@
 package main
 
 import (
-	"golang.org/x/crypto/bcrypt"
-	"fmt"
+	_"fmt"
+	"crypto/sha1"
+    "encoding/hex"
 )
 
 
+func hash(word string) string {
+    h := sha1.New()
+    h.Write([]byte(word))
+    sha1_hash := hex.EncodeToString(h.Sum(nil))
+    return string(sha1_hash)
+}
+
+/*
 func hash(coord string) string {
 	var saltedCoord string = "holaMundo"+coord
 	//fmt.Println(bcrypt.DefaultCost) //Averiguar
@@ -18,7 +27,7 @@ func hash(coord string) string {
 	return string(hashedValue)
 }
 
-/*
+
 func EncryptData(data string) string  {
 	return "data encrypted"
 }

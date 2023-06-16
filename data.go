@@ -3,10 +3,7 @@ package main
 import (
 	"database/sql"
     _ "github.com/mattn/go-sqlite3"
-//	_ "golang.org/x/crypto/bcrypt"
 	"os"
-	"fmt"
-	_"reflect"
 )
 
 const dbName = "kkm_database.db"
@@ -68,14 +65,8 @@ func insertCoordData(db *sql.DB, tipo string, key string , value string) bool {
 }
 
 
-func getCoordData(db *sql.DB, tipo string, key string) /*bool*/ {
-	var ra string
-	_ = db.QueryRow("SELECT VALUE FROM COORD WHERE TIPO = ? AND KEY = ?", tipo, key).Scan(&ra);  //WHERE TIPO = ? AND KEY = ?", tipo, key)
-	//if err != nil { fmt.Println("Error 405051") }
-	fmt.Println(ra)
-	/*if response {
-		fmt.Println(val)
-	}*/
-	
-	//return true
+func getCoordData(db *sql.DB, tipo string, key string) string {
+	var value string
+	_ = db.QueryRow("SELECT VALUE FROM COORD WHERE TIPO = ? AND KEY = ?", tipo, key).Scan(&value); 
+	return value
 }
