@@ -51,14 +51,12 @@ func insertCoordData(db *sql.DB, tipo string, key string , value string) bool {
 	stmt, err := db.Prepare("INSERT INTO coord(tipo, key, value) VALUES(?, ?, ?)")
 	if err != nil {
 		panic(err)
-		return false
 	}
 	defer stmt.Close()
 
 	_, err = stmt.Exec(tipo, key, value)
 	if err != nil {
 		panic(err)
-		return false
 	}
 	defer db.Close()
 	return true

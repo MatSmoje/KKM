@@ -2,16 +2,18 @@
 
 main()
 {
-	coord=(a1 a2 a3 a4 a5 b1 b2 b3 b4 b5 c1 c2 c3 c4 c5 d1 d2 d3 d4 d5 e1 e2 e3 e4 e5 f1 f2 f3 f4 f5 g1 g2 g3 g4 g5 h1 h2 h3 h4 h5)
-	for i in ${coord[@]};do
-		echo "$i"
-		break
-		#go run . -a -k 
-	done
-	n=({1-5})
-	for j in ${n[@]}; do
-		echo "$j"
-	done;
+	coordChar=({a..j})
+	coordNumber=({1..5})
 
+	for i in ${coordChar[@]};do
+		for j in ${coordNumber[@]}; do
+			coord="$i$j"
+			value=$(($RANDOM%98)) 
+			if [[ "$value" -lt 10 ]]; then
+				value="0$value"
+			fi
+			./PasswordManager -a -t itau -k ${coord} -v ${value}
+		done;
+	done
 }
 main "$@"
