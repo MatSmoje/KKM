@@ -20,14 +20,15 @@ func main() {
 			if arguments[1] == "--version"{
 				print_version()
 			}
-		case len(arguments) >= 3: //Insertar data
-			if (arguments[1] == "-a" || arguments[1] == "-add")  && (arguments[2] == "-t") && (arguments[4] == "-k") && (arguments[6] == "-v"){
+		case len(arguments) == 5: //Insertar data
+			if (arguments[1] == "-a" || arguments[1] == "-add") {
 				db := conectionToDatabase()
-				fmt.Println(arguments[3], arguments[5], arguments[7])
-				fmt.Println(hash(arguments[3]), hash(arguments[5]), hash(arguments[7]))
-				val := insertCoordData(db, hash(arguments[3]), hash(arguments[5]), arguments[7])
+				fmt.Println(arguments[2], arguments[3], arguments[4])
+				fmt.Println(hash(arguments[2]), hash(arguments[3]), hash(arguments[4]))
+				val := insertCoordData(db, hash(arguments[2]), hash(arguments[3]), arguments[4])
 				fmt.Println(val)
 			}
+		case len(arguments) == 4:
 			/** Consulta **/
 			if (arguments[1] == "-g") {       // kkm -g santander a1 d2 j5
 				fmt.Println("Consultando registros..")

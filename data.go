@@ -37,7 +37,7 @@ func createTable() {
 		panic(err)
 	}
 
-	crearTabla := `CREATE TABLE IF NOT EXISTS COORD (tipo TEXT NOT NULL ,key TEXT NOT NULL ,value TEXT NOT NULL, PRIMARY KEY (tipo, key))`
+	crearTabla := `CREATE TABLE IF NOT EXISTS COORD (tipo VARCHAR(20) NOT NULL ,key VARCHAR(2) NOT NULL ,value VARCHAR(2) NOT NULL, PRIMARY KEY (tipo, key))`
 	_, err = db.Exec(crearTabla)
 	if err != nil {
 		panic(err)

@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-const version = "0.0.1"
+const version = "0.0.2"
 
 const colorRed = "\033[0;33m"
 const colorNone = "\033[0m"
@@ -13,25 +13,25 @@ const colorBlue = "\033[0;36m"
 
 
 func print_help() {
-	fmt.Fprintf(os.Stdout,`%skkm: Coords manager and password manager.%s
+	fmt.Fprintf(os.Stdout,`kkm: Coords manager. 
 
-    %sUsage: kkm [-g] Type Coord Coord Coord%s
+ %sUsage: kkm [-g] Type Coord Coord Coord%s
 
-    Optional arguments
-    --version         : Get version
-    -h,   --help      : Print help options
+ %sOptional arguments%s
+ --version         : Get version
+ -h,   --help      : Print help options
 
-    Getting Data
-    -g                : Get data. First argument must be type, then coords (Max. 3)
+ %sGetting Data%s
+ -g                : Get data. First argument must be type, then coords (Max. 3)
+ Usage:  kkm -g BANK a1 b3 c4 
+ 
+ %sAdding Data%s
+ -a    --add       : Add register
+ Usage:  kkm -a BANK a1 32
 
-    Adding Data
-    -t    --type      : Add Type
-    -a    --add       : Add register
-    -k    --key       : Specify Key related to register
-    -v    --value     : Specify Value related to register
-    
+ KKM %s
 
-`, colorRed , colorNone, colorBlue, colorNone)
+`, colorRed , colorNone, colorBlue, colorNone,colorBlue, colorNone,colorBlue, colorNone, version)
 }
 
 
